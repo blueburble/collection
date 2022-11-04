@@ -1,10 +1,14 @@
 package com.common.sort;
 
+import java.util.Arrays;
+
 public class InvertedNumCalc {
 
     public static void main(String[] args){
-        int[] arr = {9,10,40,4,20,120};
+        // (9, 4) (10, 4)  (40, 4) (40,20)
+        int[] arr = {9, 10,40,4,20,120};
         System.out.println(calc(arr));
+        System.out.println(Arrays.toString(arr));
     }
 
     private static int calc(int[] arr){
@@ -31,10 +35,13 @@ public class InvertedNumCalc {
         int R = middle + 1;
         int index = 0;
         while (L <= middle && R <= right){
-            sum += arr[L] > arr[R] ? (R - L + 1) : 0;
-            for(int i = R; i <= right; i ++){
-                System.out.println(arr[L] + "," + arr[i]);
+            sum += arr[L] > arr[R] ? (middle - L + 1) : 0;
+            if(arr[L] > arr[R]){
+                for(int i = L; i <= middle; i ++){
+                    System.out.println(arr[i] + "," + arr[R]);
+                }
             }
+
             tempArray[index++] = arr[L] < arr[R] ? arr[L++] : arr[R++];
         }
         while(L  <= middle){
