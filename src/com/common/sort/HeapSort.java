@@ -15,14 +15,14 @@ public class HeapSort {
         if(null == arr || arr.length < 2){
             return;
         }
-        int i = 0;
-        for(; i < arr.length; i++){
-            heapInsert(arr, i);
+        int i = arr.length - 1;
+        for(; i >= 0 ; i--){
+            heapIfy(arr, i, arr.length);
         }
         i = arr.length - 1;;
         for(; i > 0; ){
             swap(arr, 0, i);
-            heapIfy(arr, --i);
+            heapIfy(arr, 0, --i);
         }
     }
 
@@ -35,10 +35,10 @@ public class HeapSort {
         }
     }
 
-    private static void heapIfy(int[] arr, int i){
-        int maxIndex = 0;
-        while((2 * maxIndex + 1) < i){
-                int largest =  (2 * maxIndex + 2) > i ? (2 * maxIndex + 1) :
+    private static void heapIfy(int[] arr, int i, int heapSize){
+        int maxIndex = i;
+        while((2 * maxIndex + 1) < heapSize){
+                int largest =  (2 * maxIndex + 2) > heapSize ? (2 * maxIndex + 1) :
                         (Math.max(arr[ 2 * maxIndex + 1], arr[ 2 * maxIndex + 2]) == arr[ 2 * maxIndex + 1] ? (2 * maxIndex + 1) : (2 * maxIndex + 2));
                 largest = Math.max(arr[largest], arr[maxIndex]) == arr[maxIndex] ? maxIndex : largest;
                 if(largest == maxIndex){
